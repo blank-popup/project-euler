@@ -1,0 +1,20 @@
+# -*- coding: utf-8 -*-
+
+
+# 190569291
+
+
+from aha import aha_base as abase
+from aha import aha_integer as aint
+
+name_sub_logger = abase.get_filename_from_filepath(__file__).split('.')[0]
+logger = abase.get_logger(f'{abase.k_name_header}.{name_sub_logger}')
+abase.set_logger(logger, f'{name_sub_logger}.log')
+
+@abase.tick(logger)
+def main():
+    count = aint.count_partitions(100) - 1
+    logger.info(count)
+
+if __name__ == '__main__':
+    main()
