@@ -359,6 +359,55 @@ def partitions(N, R=None):
             if len(current) == R:
                 yield current
 
+def get_table_second_stirling(N, Table=None):
+    """Get the table of stirling numbers of the second kind
+    N: natural number
+    Table: the table of stirling numbers of the second kind
+    return: table(list of list)
+
+    S(n, 1) = 1
+    S(n, n) = 1
+    S(n, k) = S(n - 1, k - 1) + k * P(n - 1, k)
+
+    jj: n
+    ii: k
+    in case of N = 9
+           jj = 1   jj = 2   jj = 3   jj = 4   jj = 5   jj = 6   jj = 7   jj = 8   jj = 9
+    ii = 1    1        1        1        1        1        1        1        1        1
+    ii = 2             1        3        7       15       31       63      127      255
+    ii = 3                      1        6       25       90      301      966     3025
+    ii = 4                               1       10       65      350     1701     7770
+    ii = 5                                        1       15      140     1050     6951
+    ii = 6                                                 1       21      266     2646
+    ii = 7                                                          1       28      462
+    ii = 8                                                                   1       36
+    ii = 9                                                                            1"""
+
+    if Table == None:
+        table = []
+    else:
+        table = Table
+
+    constraints = [c for c in range(1, N + 1)]
+    for ii, constraint in enumerate(constraints):
+        if constraint > N:
+            break
+        if ii >= len(table):
+            table.append([])
+        for jj, JJ in enumerate(range(1, N + 1)):
+            if jj < len(table[ii]):
+                continue
+            if ii == 0:
+                table[ii].append(1)
+            else:
+                if JJ < constraint:
+                    table[ii].append(0)
+                elif JJ == constraint:
+                    table[ii].append(1)
+                else:
+                    table[ii].append(table[ii - 1][jj - 1] + constraint * table[ii][jj - 1])
+    return table
+
 def count_partitions(N, R=None):
     """Get the count of partitions
     N: natural number
@@ -376,7 +425,7 @@ def count_partitions(N, R=None):
 
     jj: n
     ii: k
-
+    in case of N = 9
     solutions[(jj, ii)] = P(jj, ii) = P(jj - ii, 1) + P(jj - ii, 2) + ... + P(jj - ii, ii)
            jj = 1   jj = 2   jj = 3   jj = 4   jj = 5   jj = 6   jj = 7   jj = 8   jj = 9
     ii = 1    1        1        1        1        1        1        1        1        1
