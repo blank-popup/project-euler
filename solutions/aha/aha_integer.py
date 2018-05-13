@@ -408,14 +408,11 @@ def get_table_second_stirling(N, Table=None):
                     table[ii].append(table[ii - 1][jj - 1] + constraint * table[ii][jj - 1])
     return table
 
-def count_partitions(N, R=None):
-    """Get the count of partitions
+def get_table_partitions(N, Table=None):
+    """Get the table of partitions
     N: natural number
-    R: the count of partition
-    in case of N = 5 and R = None
-    return: 7
-    in case of N = 5 and R = 3
-    return: 2
+    Table: the table of partition
+    return: table(list of list)
 
     P(n, 1) = 1
     P(n, n) = 1
@@ -426,7 +423,6 @@ def count_partitions(N, R=None):
     jj: n
     ii: k
     in case of N = 9
-    solutions[(jj, ii)] = P(jj, ii) = P(jj - ii, 1) + P(jj - ii, 2) + ... + P(jj - ii, ii)
            jj = 1   jj = 2   jj = 3   jj = 4   jj = 5   jj = 6   jj = 7   jj = 8   jj = 9
     ii = 1    1        1        1        1        1        1        1        1        1
     ii = 2             1        1        2        2        3        3        4        4
@@ -438,15 +434,7 @@ def count_partitions(N, R=None):
     ii = 8                                                                   1        1
     ii = 9                                                                            1"""
 
-    counts = [1]
-    for ii in range(1, N + 1):
-        for jj in range(ii, N + 1):
-            if len(counts) == jj:
-                counts.append(0)
-            if jj == N and R is not None and R == ii:
-                return counts[jj - ii]
-            counts[jj] += counts[jj - ii]
-    return counts[N]
+    return get_table_way_sums_of_constraints(N, [c for c in range(1, N + 1)], Table)
 
 
 def get_digits(N):
@@ -568,13 +556,13 @@ def get_table_way_sums_of_constraints(N, Constraints=PRIMES, Table=None):
     Constraints: list of integer that is the element to be added, must be sorted and non-duplicate
     Table: list of list of integer that is the count of sum way with constraints
     return: table(list of list )
-    in case N = 10 and [2, 3, 5, 7]
+    in case of N = 10 and Constraints = [2, 3, 5, 7]
     return: following table with zero in empty cell
-           jj = 0   jj = 1   jj = 2   jj = 3   jj = 4   jj = 5   jj = 6   jj = 7   jj = 8   jj = 9   jj = 10
-    ii = 2             0        1        0        1        0        1        0        1        0        1
-    ii = 3                               1        0        1        1        1        1        2        1
-    ii = 5                                                 1        0        1        1        1        2
-    ii = 7                                                                   1        0        1        1"""
+           jj = 1   jj = 2   jj = 3   jj = 4   jj = 5   jj = 6   jj = 7   jj = 8   jj = 9   jj = 10
+    ii = 2    0        1        0        1        0        1        0        1        0        1
+    ii = 3                      1        0        1        1        1        1        2        1
+    ii = 5                                        1        0        1        1        1        2
+    ii = 7                                                          1        0        1        1"""
 
     if Table == None:
         table = []
@@ -582,33 +570,29 @@ def get_table_way_sums_of_constraints(N, Constraints=PRIMES, Table=None):
         table = Table
 
     constraints = Constraints
-    # constraints = sorted(list(set(Constraints)))
     for ii, constraint in enumerate(constraints):
         if constraint > N:
             break
         if ii >= len(table):
             table.append([])
-        for jj in range(0, N + 1):
+        for jj, JJ in enumerate(range(1, N + 1)):
             if jj < len(table[ii]):
                 continue
-            if jj == 0:
-                table[ii].append(0)
-            else:
-                if ii == 0:
-                    if jj % constraint == 0:
-                        table[ii].append(1)
-                    else:
-                        table[ii].append(0)
+            if ii == 0:
+                if JJ % constraint == 0:
+                    table[ii].append(1)
                 else:
-                    if jj < constraint:
-                        table[ii].append(0)
-                    elif jj == constraint:
-                        table[ii].append(1)
-                    else:
-                        count = 0
-                        for kk in range(0, ii + 1):
-                            count += table[kk][jj - constraint]
-                        table[ii].append(count)
+                    table[ii].append(0)
+            else:
+                if JJ < constraint:
+                    table[ii].append(0)
+                elif JJ == constraint:
+                    table[ii].append(1)
+                else:
+                    count = 0
+                    for kk in range(0, ii + 1):
+                        count += table[kk][jj - constraint]
+                    table[ii].append(count)
     return table
 
 def get_intersection(LS):

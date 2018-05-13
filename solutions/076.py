@@ -13,8 +13,11 @@ abase.set_logger(logger, f'{name_sub_logger}.log')
 
 @abase.tick(logger)
 def main():
-    count = aint.count_partitions(100) - 1
-    logger.info(count)
+    count = 0
+    table = aint.get_table_partitions(100)
+    for row in table:
+        count += row[-1]
+    logger.info(count - 1)
 
 if __name__ == '__main__':
     main()
