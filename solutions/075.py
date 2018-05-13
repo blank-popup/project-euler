@@ -13,11 +13,6 @@ abase.set_logger(logger, f'{name_sub_logger}.log')
 
 @abase.tick(logger)
 def main():
-    # a**2 + b**2 = c**2
-    # a = m**2 - n**2
-    # b = 2 * m * n
-    # c = m**2 + n**2
-
     solutions = set()
     not_solution = set()
     L_limit = 1500000

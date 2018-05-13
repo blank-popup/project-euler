@@ -12,11 +12,6 @@ abase.set_logger(logger, f'{name_sub_logger}.log')
 
 @abase.tick(logger)
 def main():
-    #              inner           outter
-    # 14(15, 40) : 1 2 3 4 5       6 7 8 9 10
-    # 19(40, 15) : 6 7 8 9 10      1 2 3 4 5
-    # logger.info('6 5 3 ...')
-
     numbers = list(ii for ii in range(1, 11))
     solutions = []
 

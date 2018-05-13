@@ -19,7 +19,7 @@ def main():
     solution = 0
     table = aint.get_table_way_sums_of_constraints(200, [1, 2, 5, 10, 20, 50, 100, 200])
     for row in table:
-        solution += row[200]
+        solution += row[-1]
     logger.info(solution)
 
     # solutions = []

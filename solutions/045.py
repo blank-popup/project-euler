@@ -2,7 +2,6 @@
 
 
 # 1533776805
-# [(1533776805, 27692)]
 
 from aha import aha_base as abase
 

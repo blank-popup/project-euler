@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
-"""Module for calculation of integer"""
+"""Module for calculation of integer
+
+augend + addend = sum
+summand + addend = sum
+addend + addend = sum
+minuend - subtrahend = difference
+multiplicand * multiplier = product
+dividend / divisor = quotient ... remainder"""
 
 import math
 import itertools
@@ -435,7 +442,6 @@ def get_table_partitions(N, Table=None):
     ii = 9                                                                            1"""
 
     return get_table_way_sums_of_constraints(N, [c for c in range(1, N + 1)], Table)
-
 
 def get_digits(N):
     """Get list all digits"""

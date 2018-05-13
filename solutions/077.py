@@ -23,12 +23,6 @@ def main():
         if count > 5000:
             break
         n += 1
-        # counts, table = aint.get_table_way_sums_of_constraints(n, aint.PRIMES, table)
-        # if counts[-1] > 5000:
-        #     break
-        # n += 1
-        # if n % 100 == 0:
-        #     logger.info(n)
     logger.info(n)
 
 if __name__ == '__main__':

@@ -24,8 +24,6 @@ def main():
         if lychrel:
             solutions.append(ii)
 
-    # 4994, 8778, 9999
-    # logger.info(solutions)
     logger.info(len(solutions))
     logger.info(sum(solutions))
 

@@ -25,7 +25,6 @@ def find_next(Solutions, Used, Numbers):
 
 @abase.tick(logger)
 def main():
-    # 5 3 2 0 1 4 1281, 8128, 2882, 8256, 5625, 2512
     numbers = []
     numbers.append([int(ii * (ii + 1) / 2) for ii in range(0, 200) if 1000 <= ii * (ii + 1) / 2 < 10000])
     numbers.append([int(ii * ii) for ii in range(0, 200) if 1000 <= ii * ii < 10000])

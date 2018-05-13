@@ -25,16 +25,6 @@ def main():
     range_b = range(2, 101)
 
     dict_abs = {}
-    # dict_abs[2] = [1, 2, 3, 4, 5, 6]
-    # dict_abs[3] = [1, 2, 3, 4]
-    # dict_abs[5] = [1, 2]
-    # dict_abs[6] = [1, 2]
-    # dict_abs[7] = [1, 2]
-    # dict_abs[10] = [1, 2]
-    # dict_abs[11] = [1]
-    # dict_abs[12] = [1]
-    # ...
-    # dict_abs[100] = [1]
     for a in range_a:
         if exist_a(a, dict_abs) == True:
             continue
@@ -51,13 +41,6 @@ def main():
             ls.append({(a ** b) ** rb for rb in range_b})
         solution += aint.get_count_inclusionexclusion(ls)
     logger.info(solution)
-
-    # solutions = []
-    # for a in range(2, 101):
-    #     for b in range(2, 101):
-    #         solutions.append(a ** b)
-    # solutions = list(set(solutions))
-    # logger.info(len(solutions))
 
 if __name__ == '__main__':
     main()

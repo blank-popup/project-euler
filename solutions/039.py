@@ -4,13 +4,6 @@
 # 840
 
 
-# a <= b <= c
-# a + b + c = p
-# a + b > c
-
-# a**2 + b**2 = c**2
-# p <= 1000
-
 from aha import aha_base as abase
 
 name_sub_logger = abase.get_filename_from_filepath(__file__).split('.')[0]
@@ -25,9 +18,6 @@ def main():
         for c in range(int((p + 2) / 3), int((p + 1) / 2)):
             for b in range(int((p - c + 1) / 2), c + 1):
                 a = p - c - b
-                # if a > b or b > c or a > c or a + b <= c:
-                #     logger.info(f'abnormal: {p} {a} {b} {c}')
-                #     continue
                 if a ** 2 + b ** 2 == c ** 2:
                     solutions[p].append((p, a, b, c))
     logger.info(solutions)
